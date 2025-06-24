@@ -17,7 +17,7 @@ import { useActiveTrack } from 'react-native-track-player'
 
 const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
-	const { dominantColor } = usePlayerBackground(
+	const { averageColor } = usePlayerBackground(
 		activeTrack?.artwork ?? unknownTrackImageUri,
 	)
 
@@ -36,7 +36,7 @@ const PlayerScreen = () => {
 	return (
 		<LinearGradient
 			style={{ flex: 1 }}
-			colors={dominantColor ? [dominantColor, colors.background] : [colors.background]}
+			colors={averageColor ? [averageColor, colors.background] : [colors.background]}
 		>
 			<View style={styles.overlayContainer}>
 				<DismissPlayerSymbol />
