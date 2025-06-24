@@ -28,7 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>music-player</string>
-				<string>com.music.player</string>
+				<string>com.aminwhat.musicplayerr</string>
 			</array>
 		</dict>
 		<dict>
