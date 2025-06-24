@@ -1,17 +1,35 @@
 import { colors } from '@/constants/tokens'
+import ColorThief from 'colorthief'
 import { useEffect, useState } from 'react'
-import { getColors } from 'react-native-image-colors'
 
-export function usePlayerBackground<T>(imageUrl: string) {
-	const [imageColors, setImageColors] = useState<T | null>(null)
+export function usePlayerBackground(imageUrl: string) {
+	const [dominantColor, setDominantColor] = useState<string | null>(null)
 
 	useEffect(() => {
-		getColors(imageUrl, {
-			fallback: colors.background,
-			cache: true,
-			key: imageUrl,
-		}).then((colors) => setImageColors(colors as T))
+		if (!imageUrl) {
+			setDominantColor(colors.background)
+			return
+		}
+		// Create an image element to extract color
+		const img = new window.Image()
+		img.crossOrigin = 'Anonymous'
+		img.src = imageUrl
+		img.onload = () => {
+			try {
+				const color = ColorThief.getColor(img)
+				if (Array.isArray(color)) {
+					// Convert [r,g,b] to hex
+					const hex = '#' + color.map(x => x.toString(16).padStart(2, '0')).join('')
+					setDominantColor(hex)
+				} else {
+					setDominantColor(colors.background)
+				}
+			} catch (e) {
+				setDominantColor(colors.background)
+			}
+		}
+		img.onerror = () => setDominantColor(colors.background)
 	}, [imageUrl])
 
-	return { imageColors }
+	return { dominantColor }
 }
