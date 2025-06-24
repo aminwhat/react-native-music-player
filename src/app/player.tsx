@@ -12,12 +12,15 @@ import { FontAwesome } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
+import { AndroidImageColors } from 'react-native-image-colors/build/types'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useActiveTrack } from 'react-native-track-player'
 
 const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
-	const { imageColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
+	const { imageColors } = usePlayerBackground<AndroidImageColors>(
+		activeTrack?.artwork ?? unknownTrackImageUri,
+	)
 
 	const { top, bottom } = useSafeAreaInsets()
 
@@ -34,7 +37,7 @@ const PlayerScreen = () => {
 	return (
 		<LinearGradient
 			style={{ flex: 1 }}
-			colors={imageColors ? [imageColors.background, imageColors.primary] : [colors.background]}
+			colors={imageColors ? [imageColors.dominant, imageColors.vibrant] : [colors.background]}
 		>
 			<View style={styles.overlayContainer}>
 				<DismissPlayerSymbol />
