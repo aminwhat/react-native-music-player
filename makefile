@@ -20,3 +20,7 @@ ios-production:
 	eas build --platform ios --profile production --local
 all-production:
 	eas build --platform all --profile production --local
+
+
+upgrade-to-53:
+	NODE_OPTIONS="--max-old-space-size=4096" yarn expo install expo@^53.0.0
