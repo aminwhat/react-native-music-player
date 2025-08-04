@@ -4,6 +4,7 @@
 	"main": "expo-router/entry",
 	"scripts": {
 		"android": "expo run:android",
+		"start": "expo start",
 		"ios": "expo run:ios",
 		"lint": "eslint ."
 	},
