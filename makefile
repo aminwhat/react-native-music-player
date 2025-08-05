@@ -23,4 +23,7 @@ all-production:
 
 
 upgrade-to-53:
-	NODE_OPTIONS="--max-old-space-size=4096" yarn expo install expo@^53.0.0
+	NODE_OPTIONS="--max-old-space-size=8192" yarn expo install expo@^53.0.0
+
+upgrade-to-53-ignore-scripts:
+	NODE_OPTIONS="--max-old-space-size=8192" npx expo install expo@^53.0.0 -- --ignore-scripts
